@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #990000;
+            padding: 10px;
+            color: white;
+            text-align: left;
+        }
+        .header img {
+            width: 150px;
+            vertical-align: middle;
+        }
+        .header .user-icon {
+            float: right;
+            margin-top: 10px;
+        }
+        .nav {
+            background-color: #003366;
+            overflow: hidden;
+        }
+        .nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .content {
+            text-align: center;
+            padding: 20px;
+        }
+        .content h1 {
+            color: #990000;
+        }
+        .student-icon {
+            width: 80px;
+            height: 80px;
+            display: block;
+            margin: 20px auto;
+        }
+        .form-container {
+            display: inline-block;
+            text-align: left;
+            padding: 20px;
+            border: 1px solid #003366;
+            border-radius: 5px;
+            position: relative;
+        }
+        .form-container .login-as-student {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #003366;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #003366;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-container input[type="submit"]:hover {
+            background-color: #002244;
+        }
+        .form-container .extra-options {
+            margin-top: 10px;
+            text-align: center;
+        }
+        .form-container .extra-options a {
+            color: #003366;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .form-container .extra-options a:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="logo.png" alt="Concordia University">
+        <img src="user-icon.png" alt="User Icon" class="user-icon">
+    </div>
+
+    <div class="nav">
+        <a href="/home">Home</a>
+        <a href="/about">About</a>
+        <a href="/departments">Departments</a>
+        <a href="/faq">FAQ</a>
+        <a href="/contact">Contact</a>
+        <a href="/events">Events</a>
+    </div>
+
+    <div class="content">
+        <h1>Department Direct - Login</h1>
+        <img src="student-icon.png" alt="Student Icon" class="student-icon">
+        <div class="form-container">
+            <div class="login-as-Coordinator">Login as a Coordinator</div>
+            <form action="/submit_login" method="POST">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+
+                <input type="submit" value="Login">
+            </form>
+            <div class="extra-options">
+                <a href="/forgot_password">Forgot Password?</a>
+                <a href="/signup">Don't have an account? Sign up</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2024 DepartmentDirect - Concordia University. All rights reserved.
+    </div>
+
+</body>
+</html>
+

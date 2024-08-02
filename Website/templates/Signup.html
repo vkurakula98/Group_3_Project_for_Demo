@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #990000;
+            padding: 10px;
+            color: white;
+            text-align: left;
+        }
+        .header img {
+            width: 150px;
+            vertical-align: middle;
+        }
+        .header .user-icon {
+            float: right;
+            margin-top: 10px;
+        }
+        .nav {
+            background-color: #003366;
+            overflow: hidden;
+        }
+        .nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .content {
+            text-align: center;
+            padding: 20px;
+        }
+        .content h1 {
+            color: #990000;
+        }
+        .form-container {
+            display: inline-block;
+            text-align: left;
+            padding: 20px;
+            border: 1px solid #003366;
+            border-radius: 5px;
+            max-width: 600px;
+            width: 100%;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="email"],
+        .form-container input[type="password"],
+        .form-container input[type="date"],
+        .form-container select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #003366;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-container input[type="submit"]:hover {
+            background-color: #002244;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <script>
+        function updateFormFields() {
+            const role = document.getElementById('role').value;
+            const idField = document.getElementById('id-field');
+            if (role === 'student') {
+                idField.innerHTML = `
+                    <label for="student-id">Student ID</label>
+                    <input type="text" id="student-id" name="student-id" required>
+                `;
+            } else if (role === 'coordinator') {
+                idField.innerHTML = `
+                    <label for="coordinator-id">Coordinator ID</label>
+                    <input type="text" id="coordinator-id" name="coordinator-id" required>
+                `;
+            } else {
+                idField.innerHTML = '';
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="header">
+        <img src="logo.png" alt="Concordia University">
+        <img src="user-icon.png" alt="User Icon" class="user-icon">
+    </div>
+
+    <div class="nav">
+        <a href="/home">Home</a>
+        <a href="/about">About</a>
+        <a href="/departments">Departments</a>
+        <a href="/faq">FAQ</a>
+        <a href="/contact">Contact</a>
+        <a href="/events">Events</a>
+    </div>
+
+    <div class="content">
+        <h1>Department Direct - Signup</h1>
+        <div class="form-container">
+            <form action="/submit_signup" method="POST">
+                <label for="role">Select Role</label>
+                <select id="role" name="role" onchange="updateFormFields()" required>
+                    <option value="">Select a role</option>
+                    <option value="student">Student</option>
+                    <option value="coordinator">Coordinator</option>
+                </select>
+
+                <div id="id-field">
+                    <!-- Role-specific ID field will be inserted here -->
+                </div>
+
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" name="first-name" required>
+
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="last-name" required>
+
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob" required>
+
+                <label for="department">Department</label>
+                <input type="text" id="department" name="department" required>
+
+                <label for="email">Email ID</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+
+                <input type="submit" value="Register">
+            </form>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2024 DepartmentDirect - Concordia University. All rights reserved.
+    </div>
+
+</body>
+</html>
