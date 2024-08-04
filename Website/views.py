@@ -1,5 +1,13 @@
-from flask import Blueprint, render_template, request, flash, jsonify
 
+
+import bcrypt
+import encodings
+
+from . import db
+import mongo
+from flask import Blueprint, render_template, request, flash, jsonify, url_for, request, session, redirect, url_for
+from .models import Student
+from werkzeug.security import generate_password_hash, check_password_hash
 # from Website.models import User
 
 views = Blueprint('views',__name__)
@@ -28,28 +36,37 @@ def base():
 def signup():
   return render_template("Signup.html")
 
-# @views.route('Register')
-# def RegCnf():
-#     data = request.get_json()
-#     role = data.get('role')
-#     user_id = data.get('user_id')
-#     first_name = data.get('first_name')
-#     last_name = data.get('last_name')
-#     dob = data.get('dob')
-#     department = data.get('department')
-#     email = data.get('email')
-#     password = data.get('password')
-#     confirm_password = data.get('confirm_password')
-#
-#     if password != confirm_password:
-#         return jsonify({'msg': 'Passwords do not match'}), 400
-#
-#     existing_user = User.get_user_by_email(email)
-#     if existing_user:
-#         return jsonify({'msg': 'User already exists'}), 400
-#
-#     User.register_user(role, user_id, first_name, last_name, dob, department, email, password)
-#     return jsonify({'msg': 'User registered successfully'}), 201
+@views.route('/submit_signup',methods=['POST','GET'])
+def RegCnf():
+    # data = request.form
+    # print(data)
+    if request.method == 'POST':
+        role = request.form.get('Select Role')
+        Student_ID = request.form.get('Student ID')
+        First_Name = request.form.get('First Name')
+        Last_Name = request.form.get('Last Name')
+        DoB = request.form.get('Date of Birth')
+        Department = request.form.get('Department')
+        email_id = request.form.get('Email ID')
+        password = request.form.get('Password')
+        if role == 'Student':
+            new_user = Student(Student_ID=Student_ID,email_id=email_id,First_Name=First_Name,Last_Name=Last_Name,DoB=DoB,Department=Department,password=generate_password_hash(password, method='sha256'))
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect(url_for('views.home'))
+        #elif role == 'Coordinator':
+
+
+        password = request.form.get('Password')
+        CnfPassword = request.form.get('Confirm Password')
+
+        # if len(email) < 4:
+        #     pass
+        # elif password != CnfPassword:
+        #     pass
+
+
+    return render_template("RegistrationConfirmed.html")
 
 @views.route('/faq')
 def faq():

@@ -84,6 +84,10 @@
         .form-container input[type="submit"]:hover {
             background-color: #002244;
         }
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
         .footer {
             background-color: #333;
             color: white;
@@ -112,6 +116,47 @@
                 idField.innerHTML = '';
             }
         }
+
+        function validateForm(event) {
+            event.preventDefault();
+
+            const role = document.getElementById('role').value;
+            const studentId = document.getElementById('student-id');
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            let valid = true;
+            let errorMessage = '';
+
+            // Check if password matches confirm password
+            if (password !== confirmPassword) {
+                errorMessage += 'Passwords do not match.<br>';
+                valid = false;
+            }
+
+            // Check if student ID is 6 digits
+            if (role === 'student' && (!studentId || studentId.value.length !== 6)) {
+                errorMessage += 'Student ID must be 6 digits.<br>';
+                valid = false;
+            }
+
+            // Validate email format
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                errorMessage += 'Invalid email format.<br>';
+                valid = false;
+            }
+
+            // Display error message if form is not valid
+            if (!valid) {
+                document.getElementById('error-message').innerHTML = errorMessage;
+                return;
+            }
+
+            // If form is valid, submit it
+            document.querySelector('form').submit();
+        }
     </script>
 </head>
 <body>
@@ -133,7 +178,8 @@
     <div class="content">
         <h1>Department Direct - Signup</h1>
         <div class="form-container">
-            <form action="/submit_signup" method="POST">
+            <div id="error-message" class="error"></div>
+            <form onsubmit="validateForm(event)">
                 <label for="role">Select Role</label>
                 <select id="role" name="role" onchange="updateFormFields()" required>
                     <option value="">Select a role</option>
