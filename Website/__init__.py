@@ -1,32 +1,38 @@
-import sqlalchemy as db
-from flask import Flask
-from os import  path
 
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from os import path
+
+
+db = SQLAlchemy()
 DB_NAME = "database.db"
+
 
 
 def create_app():
 
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'p@SSWORD'
-    app.config['SQLALCHEMY_DATABASE_URI'] = db.create_engine(f'sqlite:///{DB_NAME}')
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    db.init_app(app)
 
-    # mongo = pymongo(app)
     from .views import views
     # from .auth import auth
 
     app.register_blueprint(views, name=__name__, url_prefix='/')
     # app.register_blueprint(auth, name=__name__, url_prefix='/')
 
-    from .models import Student
+    #from .models import Student
 
-    # create_database(app)
+    create_database(app)
 
     return app
 
-# def create_database(app):
-#     if not path.exists('Website/'+DB_NAME):
-#         # db.create_engine(app=app)
-#         # print('Created Database')
+def create_database(app):
+    if not path.exists(f'Website/{DB_NAME}'):
+        with app.app_context():
+            db.create_all()
+        print('Created Database')
+
 
 

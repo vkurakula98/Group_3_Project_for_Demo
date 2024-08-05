@@ -6,8 +6,11 @@ import encodings
 from . import db
 import mongo
 from flask import Blueprint, render_template, request, flash, jsonify, url_for, request, session, redirect, url_for
-from .models import Student
+
 from werkzeug.security import generate_password_hash, check_password_hash
+
+from .models import Student
+
 # from Website.models import User
 
 views = Blueprint('views',__name__)
@@ -18,7 +21,7 @@ def home():
     return render_template("Base.html")
 @views.route('/login')
 def login():
-  return render_template("choice.html")
+    return render_template("choice.html")
 
 @views.route('/coordinator_login')
 def login_student():
@@ -27,6 +30,10 @@ def login_student():
 @views.route('/student_login')
 def login_coordinator():
   return render_template("Login_Student.html")
+
+# @views.route('/student_login')
+# def login_coordinator():
+#   return render_template("Login_Student.html")
 
 @views.route('/home')
 def base():
@@ -38,8 +45,8 @@ def signup():
 
 @views.route('/submit_signup',methods=['POST','GET'])
 def RegCnf():
-    # data = request.form
-    # print(data)
+    data = request.form
+    print(data)
     if request.method == 'POST':
         role = request.form.get('Select Role')
         Student_ID = request.form.get('Student ID')
@@ -56,14 +63,6 @@ def RegCnf():
             return redirect(url_for('views.home'))
         #elif role == 'Coordinator':
 
-
-        password = request.form.get('Password')
-        CnfPassword = request.form.get('Confirm Password')
-
-        # if len(email) < 4:
-        #     pass
-        # elif password != CnfPassword:
-        #     pass
 
 
     return render_template("RegistrationConfirmed.html")
