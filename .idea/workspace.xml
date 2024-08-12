@@ -5,32 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7304173d-72ad-4c87-a3fc-e1170632a368" name="Changes" comment="changes">
-      <change afterPath="$PROJECT_DIR$/Website/templates/About.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Website/templates/Contact.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Website/templates/Created_Events_view.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Website/templates/Departments.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Website/templates/Event_creation_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Website/templates/Event_registration_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Website/templates/Events.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Website/templates/Student_questions.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Website/templates/View_events_students.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Website/templates/answer_questions.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Website/templates/ask_question.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Website/templates/coordinator_profile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Website/templates/edit_event.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Website/templates/student_profile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Website/templates/testingfile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Website/templates/testingfile2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Website/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Website/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/templates/Base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Website/templates/Base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/templates/FAQ.html" beforeDir="false" afterPath="$PROJECT_DIR$/Website/templates/FAQ.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/templates/Login_Coordinator.html" beforeDir="false" afterPath="$PROJECT_DIR$/Website/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/templates/Login_Student.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/templates/Signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/Website/templates/Signup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/templates/choice.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Website/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +142,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722895384752</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="changes">
+      <option name="closed" value="true" />
+      <created>1723473000568</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1723473000569</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
