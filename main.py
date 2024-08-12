@@ -9,6 +9,7 @@ from flask_pymongo import PyMongo
 # app.config.from_object(Config)
 # mongo = PyMongo(app)
 # jwt = JWTManager(app)
+#changes made by vamshi
 app = create_app()
 
 if __name__ == '__main__':
