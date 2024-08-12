@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>Coordinator's Profile - Concordia University</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background: #800000;
+            color: #fff;
+            padding: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: #00468b 4px solid;
+        }
+
+        header img {
+            height: 60px;
+            margin-left: 20px;
+        }
+
+        .user-icon {
+            margin-right: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .user-info {
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info p {
+            margin: 0;
+            font-size: 1em;
+            margin-right: 10px; /* Add margin to the right of the name */
+        }
+
+        .user-icon img {
+            height: 40px;
+            width: 40px;
+        }
+
+        .user-popup {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            width: 150px;
+            z-index: 1000;
+        }
+
+        .user-popup button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #00468b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+
+        .user-popup button:hover {
+            background: #002f5f;
+        }
+
+        nav {
+            background: #00468b;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            padding: 0;
+            list-style: none;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        main {
+            padding: 20px 0;
+        }
+
+        .menu-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .menu-container button {
+            padding: 10px 20px;
+            margin: 10px;
+            background: #00468b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .menu-container button:hover {
+            background: #002f5f;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7b/Concordia_University_logo.svg/1200px-Concordia_University_logo.svg.png" alt="Concordia University">
+        <div class="user-icon" onclick="toggleUserPopup()">
+            <div class="user-info">
+                <p>Welcome, {{ coordinator.first_name }} {{ coordinator.last_name }}</p>
+            </div>
+            <img src="https://img.icons8.com/ios-filled/50/000000/user-male-circle.png" alt="User Icon">
+            <div class="user-popup" id="userPopup">
+                <button onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href='/Coordinator_home'>Home</a></li>
+                <li><a href='/event_creation'>Create Events</a></li>
+                <li><a href='/edit_contact'>Edit Contact</a></li>
+                <li><a href='/view_questions'>Show Questions</a></li>
+            </ul>
+        </div>
+    </nav>
+
+<!--    <main>-->
+<!--        <div class="container">-->
+<!--            <div class="menu-container">-->
+<!--                <button onclick="showEvents()">Events</button>-->
+<!--                <button onclick="showQuestions()">Questions</button>-->
+<!--                <button onclick="showContact()">Edit Contact</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </main>-->
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 DepartmentDirect - Concordia University. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleUserPopup() {
+            var popup = document.getElementById("userPopup");
+            popup.style.display = popup.style.display === "block" ? "none" : "block";
+        }
+
+        function logout() {
+            window.location.href = '/logout';
+        }
+
+        function showEvents() {
+            window.location.href = '/events';
+        }
+
+        function showQuestions() {
+            window.location.href = '/questions';
+        }
+
+        function showContact() {
+            window.location.href = '/edit-contact';
+        }
+
+        // Keep track of the previous page
+        window.onpopstate = function(event) {
+            if (event.state && event.state.page) {
+                window.location.href = event.state.page;
+            }
+        };
+
+        // Save the current page state when navigating
+        function navigateTo(url) {
+            history.pushState({page: url}, 'coordinator_profile', url);
+            window.location.href = url;
+        }
+
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                navigateTo(this.href);
+            });
+        });
+    </script>
+</body>
+</html>

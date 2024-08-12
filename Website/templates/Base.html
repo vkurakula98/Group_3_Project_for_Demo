@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DepartmentDirect - Concordia University</title>
+    <title>Home - Concordia University</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,11 +11,17 @@
             padding: 0;
             background: #f4f4f4;
             color: #333;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background: #121212;
+            color: #f4f4f4;
         }
 
         .container {
             width: 80%;
-            margin: auto;
+            margin: 0 auto;
             overflow: hidden;
         }
 
@@ -27,6 +33,7 @@
             align-items: center;
             justify-content: space-between;
             border-bottom: #00468b 4px solid;
+            position: relative;
         }
 
         header img {
@@ -86,12 +93,18 @@
             background: #00468b;
             color: #fff;
             padding: 10px 0;
+            transition: background 0.3s;
+        }
+
+        nav.dark-mode {
+            background: #333;
         }
 
         nav ul {
             padding: 0;
             list-style: none;
             text-align: center;
+            margin: 0;
         }
 
         nav ul li {
@@ -109,53 +122,106 @@
             padding: 20px 0;
         }
 
-        section#department {
+        .home-header {
             text-align: center;
             padding: 20px 0;
+            margin-bottom: 20px;
         }
 
-        section#department h2 {
+        .home-header h1 {
             font-size: 2.5em;
             color: #800000;
+            margin: 0;
         }
 
-        .carousel {
-            position: relative;
-            max-width: 800px;
-            margin: 20px auto;
-            overflow: hidden;
-            border-radius: 10px;
-            border: 4px solid #00468b;
+        body.dark-mode .home-header h1 {
+            color: #f4f4f4;
         }
 
-        .carousel img {
-            width: 100%;
-            display: none;
+        .home-header p {
+            font-size: 1.2em;
+            color: #333;
         }
 
-        .carousel img.active {
-            display: block;
+        body.dark-mode .home-header p {
+            color: #f4f4f4;
         }
 
-        .carousel .prev, .carousel .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
+        .info-boxes {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+
+        .info-box {
+            background: #00468b;
             color: #fff;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
+            border-radius: 10px;
+            padding: 20px;
+            width: 22%;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        body.dark-mode .info-box {
+            background: #333;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+        }
+
+        .info-box h2 {
             font-size: 1.5em;
-            border-radius: 50%;
+            margin: 10px 0;
         }
 
-        .carousel .prev {
-            left: 10px;
+        .info-box p {
+            font-size: 1em;
         }
 
-        .carousel .next {
-            right: 10px;
+        .info-box img {
+            width: 60px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .image-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .image-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: box-shadow 0.3s;
+        }
+
+        body.dark-mode .image-section img {
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+        }
+
+        .campus-living {
+            background: #00468b;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            transition: background 0.3s;
+        }
+
+        body.dark-mode .campus-living {
+            background: #333;
+        }
+
+        .campus-living h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .campus-living p {
+            font-size: 1.2em;
         }
 
         footer {
@@ -164,17 +230,58 @@
             text-align: center;
             padding: 10px 0;
             border-top: #00468b 4px solid;
+            margin-top: 20px;
         }
 
         footer p {
             margin: 0;
         }
 
+        .dark-mode-toggle {
+            position: absolute;
+            top: 20px;
+            right: 100px;
+            background: #00468b;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.dark-mode .dark-mode-toggle {
+            background: #333;
+            color: #fff;
+        }
+
+        .university-life, .other-departments {
+            background: #333399;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            transition: background 0.3s;
+        }
+
+        body.dark-mode .university-life, body.dark-mode .other-departments {
+            background: #121212;
+        }
+
+        .university-life h2, .other-departments h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .university-life p, .other-departments p {
+            font-size: 1.2em;
+        }
     </style>
 </head>
 <body>
     <header>
-        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7b/Concordia_University_logo.svg/1200px-Concordia_University_logo.svg.png" alt="Concordia University">
+        <img src="https://drive.google.com/file/d/1ixswhX_1qjDytDiIpBMN17hdYkAMvVJX/view?usp=sharing.jpg" alt="Concordia University">
+        <button class="dark-mode-toggle" onclick="toggleDarkMode()">Switch to Dark Mode</button>
         <div class="user-icon" onclick="toggleUserPopup()">
             <img src="https://img.icons8.com/ios-filled/50/000000/user-male-circle.png" alt="User Icon">
             <div class="user-popup" id="userPopup">
@@ -192,76 +299,77 @@
     <nav>
         <div class="container">
             <ul>
-                <li><a href='/home'>
-                   Home
-                </a></li>
-                <li><a href='/about'>
-                   About
-                </a></li>
-                <li><a href='/departments'>
-                   Departments
-                </a></li>
-                <li><a href='/faq'>
-                   FAQ
-                </a></li>
-                <li><a href='/contact'>
-                   Contact
-                </a></li>
-                <li><a href='/events'>
-                   Events
-                </a></li>
+                <li><a href='/home'>Home</a></li>
+                <li><a href='/about'>About</a></li>
+                <li><a href='/departments'>Departments</a></li>
+                <li><a href='/faq'>FAQ</a></li>
+                <li><a href='/contact'>Contact</a></li>
             </ul>
         </div>
     </nav>
 
     <main>
-        <section id="department">
-            <h2>Department Direct</h2>
+        <section class="home-header">
+            <h1>Welcome to Concordia University</h1>
+            <p>Your gateway to a world of opportunities and excellence.</p>
         </section>
 
-        <section class="carousel" id="carousel">
-            <img src="https://www.concordia.ca/content/dam/concordia/offices/aar/assets/images/events/2019/open-house/summer-open-house-1.jpg" alt="University Image 1" class="active">
-            <img src="https://www.concordia.ca/content/dam/concordia/offices/aar/assets/images/events/2019/open-house/summer-open-house-2.jpg" alt="University Image 2">
-            <img src="https://www.concordia.ca/content/dam/concordia/offices/aar/assets/images/events/2019/open-house/summer-open-house-3.jpg" alt="University Image 3">
-            <img src="https://www.concordia.ca/content/dam/concordia/offices/aar/assets/images/events/2019/open-house/summer-open-house-4.jpg" alt="University Image 4">
-            <button class="prev" onclick="prevSlide()">&#10094;</button>
-            <button class="next" onclick="nextSlide()">&#10095;</button>
+        <section class="info-boxes">
+            <div class="info-box">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/trophy.png" alt="Award Icon">
+                <h2>Awards</h2>
+                <p>Best Employer for 2023</p>
+            </div>
+            <div class="info-box">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" alt="Ranking Icon">
+                <h2>Ranking</h2>
+                <p>2nd in Canada, Top 10 in the world</p>
+            </div>
+            <div class="info-box">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/globe.png" alt="Campuses Icon">
+                <h2>Campuses</h2>
+                <p>New York, California, Vancouver, Mumbai, Ahmedabad</p>
+            </div>
+            <div class="info-box">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/door.png" alt="Intakes Icon">
+                <h2>Intakes</h2>
+                <p>Spring, Summer, Fall</p>
+            </div>
+        </section>
+
+        <section class="image-section">
+            <img src="D:\Academics\Semester 2 2024 july - August\COEN 6311 Software Engineering\Project\Group_3_Project_for_Demo\images\university.jpg" alt="Concordia University Campus">
+        </section>
+
+        <section class="university-life">
+            <h2>University Life</h2>
+            <p>Explore our vibrant campus life with cultural, sports, and technical events.</p>
+        </section>
+
+        <section class="other-departments">
+            <h2>Other Departments</h2>
+            <p>We offer a variety of programs including Business, Fine Arts, and more.</p>
+        </section>
+
+        <section class="campus-living">
+            <h2>On-Campus Living</h2>
+            <p>Choose from state-sharing and private options with meals included.</p>
         </section>
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2024 DepartmentDirect - Concordia University. All rights reserved.</p>
-        </div>
+        <p>&copy; 2024 Concordia University. All rights reserved.</p>
     </footer>
 
     <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
         function toggleUserPopup() {
-            var popup = document.getElementById("userPopup");
-            popup.style.display = popup.style.display === "block" ? "none" : "block";
+            const userPopup = document.getElementById('userPopup');
+            userPopup.style.display = userPopup.style.display === 'block' ? 'none' : 'block';
         }
-
-        let slideIndex = 0;
-        const slides = document.querySelectorAll('.carousel img');
-        const totalSlides = slides.length;
-
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === index);
-            });
-        }
-
-        function nextSlide() {
-            slideIndex = (slideIndex + 1) % totalSlides;
-            showSlide(slideIndex);
-        }
-
-        function prevSlide() {
-            slideIndex = (slideIndex - 1 + totalSlides) % totalSlides;
-            showSlide(slideIndex);
-        }
-
-        setInterval(nextSlide, 3000); // Auto-scroll every 3 seconds
     </script>
 </body>
 </html>

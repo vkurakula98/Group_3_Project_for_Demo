@@ -20,10 +20,6 @@
             width: 150px;
             vertical-align: middle;
         }
-        .header .user-icon {
-            float: right;
-            margin-top: 10px;
-        }
         .nav {
             background-color: #003366;
             overflow: hidden;
@@ -47,26 +43,14 @@
         .content h1 {
             color: #990000;
         }
-        .student-icon {
-            width: 80px;
-            height: 80px;
-            display: block;
-            margin: 20px auto;
-        }
         .form-container {
             display: inline-block;
             text-align: left;
             padding: 20px;
             border: 1px solid #003366;
             border-radius: 5px;
-            position: relative;
-        }
-        .form-container .login-as-student {
-            text-align: center;
-            margin-bottom: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #003366;
+            max-width: 600px;
+            width: 100%;
         }
         .form-container label {
             display: block;
@@ -74,7 +58,8 @@
             font-weight: bold;
         }
         .form-container input[type="text"],
-        .form-container input[type="password"] {
+        .form-container input[type="password"],
+        .form-container select {
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
@@ -93,16 +78,16 @@
         .form-container input[type="submit"]:hover {
             background-color: #002244;
         }
-        .form-container .extra-options {
+        .extra-options {
             margin-top: 10px;
             text-align: center;
         }
-        .form-container .extra-options a {
+        .extra-options a {
             color: #003366;
             text-decoration: none;
             margin: 0 10px;
         }
-        .form-container .extra-options a:hover {
+        .extra-options a:hover {
             text-decoration: underline;
         }
         .footer {
@@ -120,7 +105,6 @@
 
     <div class="header">
         <img src="logo.png" alt="Concordia University">
-        <img src="user-icon.png" alt="User Icon" class="user-icon">
     </div>
 
     <div class="nav">
@@ -129,17 +113,21 @@
         <a href="/departments">Departments</a>
         <a href="/faq">FAQ</a>
         <a href="/contact">Contact</a>
-        <a href="/events">Events</a>
     </div>
 
     <div class="content">
         <h1>Department Direct - Login</h1>
-        <img src="student-icon.png" alt="Student Icon" class="student-icon">
         <div class="form-container">
-            <div class="login-as-student">Login as a Student</div>
-            <form action="/submit_login_student" method="POST">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
+            <form action="/submit_login" method="POST">
+                <label for="role">Select Role</label>
+                <select id="role" name="role" required>
+                    <option value="">Select a role</option>
+                    <option value="student">Student</option>
+                    <option value="coordinator">Coordinator</option>
+                </select>
+
+                <label for="email">Email ID</label>
+                <input type="text" id="email" name="email" required>
 
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
@@ -159,4 +147,3 @@
 
 </body>
 </html>
-

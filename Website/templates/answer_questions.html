@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>Coordinator's Question Management - Concordia University</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background: #800000;
+            color: #fff;
+            padding: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: #00468b 4px solid;
+        }
+
+        header img {
+            height: 60px;
+            margin-left: 20px;
+        }
+
+        .user-icon {
+            margin-right: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .user-info {
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info p {
+            margin: 0;
+            font-size: 1em;
+            margin-right: 10px;
+        }
+
+        .user-icon img {
+            height: 40px;
+            width: 40px;
+        }
+
+        .user-popup {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            width: 150px;
+            z-index: 1000;
+        }
+
+        .user-popup button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #00468b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+
+        .user-popup button:hover {
+            background: #002f5f;
+        }
+
+        nav {
+            background: #00468b;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            padding: 0;
+            list-style: none;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        main {
+            padding: 20px 0;
+        }
+
+        .question-list {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-list h2 {
+            margin-bottom: 20px;
+            color: #00468b;
+        }
+
+        .student-question {
+            margin-bottom: 10px;
+            cursor: pointer;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .student-question:hover {
+            background: #f1f1f1;
+        }
+
+        .question-collapse {
+            display: none;
+            padding: 15px;
+            background: #f4f4f4;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-top: 10px;
+        }
+
+        .question-collapse textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            resize: vertical;
+        }
+
+        .question-collapse button {
+            padding: 10px 20px;
+            background: #00468b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .question-collapse button:hover {
+            background: #002f5f;
+        }
+
+        footer {
+            background-color: #800000;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+            border-top: 4px solid #00468b;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7b/Concordia_University_logo.svg/1200px-Concordia_University_logo.svg.png"
+            alt="Concordia University">
+        <div class="user-icon" onclick="toggleUserPopup()">
+            <div class="user-info">
+                <p>Welcome, {{ coordinator.first_name }} {{ coordinator.last_name }}</p>
+            </div>
+            <img src="https://img.icons8.com/ios-filled/50/000000/user-male-circle.png" alt="User Icon">
+            <div class="user-popup" id="userPopup">
+                <button onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href='/Coordinator_home'>Home</a></li>
+                <li><a href='/event_creation'>Create Events</a></li>
+                <li><a href='/edit_contact'>Edit Contact</a></li>
+                <li><a href='/questions'>Show Questions</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="question-list">
+                <h2>Questions Asked by Students</h2>
+                {% for question in questions %}
+                <div class="student-question" onclick="toggleQuestion({{ question.id }})">
+                    <p>{{ question.student_name }} (ID: {{ question.student_id }})</p>
+                </div>
+                <div class="question-collapse" id="question-{{ question.id }}">
+                    <p><strong>Question:</strong> {{ question.question_text }}</p>
+                    <textarea id="answer-{{ question.id }}" rows="5" placeholder="Type your answer here..."></textarea>
+                    <button onclick="submitAnswer({{ question.id }})">Submit Answer</button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 DepartmentDirect - Concordia University. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleUserPopup() {
+            var popup = document.getElementById("userPopup");
+            popup.style.display = popup.style.display === "block" ? "none" : "block";
+        }
+
+        function logout() {
+            window.location.href = '/logout';
+        }
+
+        function toggleQuestion(questionId) {
+            var collapseSection = document.getElementById(`question-${questionId}`);
+            collapseSection.style.display = collapseSection.style.display === "block" ? "none" : "block";
+        }
+
+        function submitAnswer(questionId) {
+            var answerText = document.getElementById(`answer-${questionId}`).value;
+            if (answerText.trim() === '') {
+                alert('Please enter an answer before submitting.');
+                return;
+            }
+
+            fetch(`/submit_answer/${questionId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ answer: answerText })
+            }).then(response => {
+                if (response.ok) {
+                    alert('Answer submitted successfully!');
+                    document.getElementById(`question-${questionId}`).style.display = 'none';
+                } else {
+                    alert('Failed to submit answer.');
+                }
+            }).catch(error => console.error('Error submitting answer:', error));
+        }
+    </script>
+</body>
+
+</html>

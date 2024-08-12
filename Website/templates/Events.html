@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>Events - Concordia University</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background: #800000;
+            color: #fff;
+            padding: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: #00468b 4px solid;
+        }
+
+        header img {
+            height: 60px;
+            margin-left: 20px;
+        }
+
+        .user-icon {
+            margin-right: 20px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .user-icon img {
+            height: 40px;
+            width: 40px;
+        }
+
+        .user-popup {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            width: 150px;
+            z-index: 1000;
+        }
+
+        .user-popup h3 {
+            margin: 0 0 10px 0;
+            font-size: 1em;
+            text-align: center;
+            color: #00468b;
+        }
+
+        .user-popup button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #00468b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+
+        .user-popup button:hover {
+            background: #002f5f;
+        }
+
+        nav {
+            background: #00468b;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            padding: 0;
+            list-style: none;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        main {
+            padding: 20px 0;
+        }
+
+        .events-header {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #00468b;
+            text-align: center;
+        }
+
+        .search-bar {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-bar input {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+
+        .search-bar button {
+            width: 20%;
+            padding: 10px;
+            background: #00468b;
+            color: #fff;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background: #002f5f;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #00468b;
+            color: white;
+            cursor: pointer;
+        }
+
+        th.sortable:hover {
+            background-color: #003f6c;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            border-top: #00468b 4px solid;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .filter-container {
+            margin: 20px 0;
+        }
+
+        .filter-container label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .filter-container select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            width: 150px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7b/Concordia_University_logo.svg/1200px-Concordia_University_logo.svg.png" alt="Concordia University">
+        <div class="user-icon" onclick="toggleUserPopup()">
+            <img src="https://img.icons8.com/ios-filled/50/000000/user-male-circle.png" alt="User Icon">
+            <div class="user-popup" id="userPopup">
+                <h3>Account</h3>
+                <a href="/login">
+                    <button>Login</button>
+                </a>
+                <a href="/signup">
+                    <button>Signup</button>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href='/home'>Home</a></li>
+                <li><a href='/about'>About</a></li>
+                <li><a href='/departments'>Departments</a></li>
+                <li><a href='/faq'>FAQ</a></li>
+                <li><a href='/contact'>Contact</a></li>
+                <li><a href='/events'>Events</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="events-header">Upcoming Events</div>
+
+            <div class="search-bar">
+                <input type="text" id="searchInput" onkeyup="searchEvents()" placeholder="Search for events...">
+                <button onclick="searchEvents()">Search</button>
+            </div>
+
+            <div class="filter-container">
+                <label for="locationFilter">Location:</label>
+                <select id="locationFilter" onchange="filterEvents()">
+                    <option value="">All</option>
+                    <option value="On Campus">On Campus</option>
+                    <option value="Virtual">Virtual</option>
+                </select>
+
+                <label for="timePeriodFilter">Time Period:</label>
+                <select id="timePeriodFilter" onchange="filterEvents()">
+                    <option value="">All</option>
+                    <option value="Today">Today</option>
+                    <option value="Morning">Morning</option>
+                    <option value="Afternoon">Afternoon</option>
+                    <option value="Evening">Evening</option>
+                    <option value="Night">Night</option>
+                    <option value="Days">Days</option>
+                    <option value="Weeks">Weeks</option>
+                </select>
+            </div>
+
+            <div class="table-container">
+                <table id="eventsTable">
+                    <thead>
+                        <tr>
+                            <th class="sortable" onclick="sortTable(0)">Name</th>
+                            <th class="sortable" onclick="sortTable(1)">Location</th>
+                            <th class="sortable" onclick="sortTable(2)">Start Date</th>
+                            <th class="sortable" onclick="sortTable(3)">Start Time</th>
+                            <th class="sortable" onclick="sortTable(4)">Duration</th>
+                            <th class="sortable" onclick="sortTable(5)">Time Period</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Example event rows -->
+                        <tr>
+                            <td>Event A</td>
+                            <td>On Campus</td>
+                            <td>2024-08-10</td>
+                            <td>10:00 AM</td>
+                            <td>2 hours</td>
+                            <td>Morning</td>
+                        </tr>
+                        <tr>
+                            <td>Event B</td>
+                            <td>Virtual</td>
+                            <td>2024-08-11</td>
+                            <td>2:00 PM</td>
+                            <td>1 hour</td>
+                            <td>Afternoon</td>
+                        </tr>
+                        <!-- Add more event rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 DepartmentDirect - Concordia University. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleUserPopup() {
+            var popup = document.getElementById("userPopup");
+            popup.style.display = popup.style.display === "block" ? "none" : "block";
+        }
+
+        function searchEvents() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById('searchInput');
+            filter = input.value.toLowerCase();
+            table = document.getElementById("eventsTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) { // Skip header row
+                tr[i].style.display = "none";
+                td = tr[i].getElementsByTagName("td");
+                for (var j = 0; j < td.length; j++) {
+                    if (td[j] && td[j].innerHTML.toLowerCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                        break;
+                    }
+                }
+            }
+        }
+
+        function filterEvents() {
+            var locationFilter, timePeriodFilter, table, tr, td, i, locationText, timePeriodText;
+            locationFilter = document.getElementById('locationFilter').value;
+            timePeriodFilter = document.getElementById('timePeriodFilter').value;
+            table = document.getElementById("eventsTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) { // Skip header row
+                td = tr[i].getElementsByTagName("td");
+                locationText = td[1].textContent || td[1].innerText;
+                timePeriodText = td[5].textContent || td[5].innerText;
+
+                if ((locationFilter === "" || locationText === locationFilter) &&
+                    (timePeriodFilter === "" || timePeriodText === timePeriodFilter)) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+
+        function sortTable(n) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchCount = 0;
+            table = document.getElementById("eventsTable");
+            switching = true;
+            dir = "asc"; // Set the sorting direction to ascending
+
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+
+                    if (dir === "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir === "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchCount++;
+                } else {
+                    if (switchCount === 0 && dir === "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

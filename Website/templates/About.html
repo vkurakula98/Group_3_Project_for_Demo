@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Concordia University</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        header {
+            background: #800000;
+            color: #fff;
+            padding: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: #00468b 4px solid;
+        }
+
+        header img {
+            height: 60px;
+            margin-left: 20px;
+        }
+
+        .user-icon {
+            margin-right: 20px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .user-icon img {
+            height: 40px;
+            width: 40px;
+        }
+
+        .user-popup {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            width: 150px;
+            z-index: 1000;
+        }
+
+        .user-popup h3 {
+            margin: 0 0 10px 0;
+            font-size: 1em;
+            text-align: center;
+            color: #00468b;
+        }
+
+        .user-popup button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #00468b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+
+        .user-popup button:hover {
+            background: #002f5f;
+        }
+
+        nav {
+            background: #00468b;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            padding: 0;
+            list-style: none;
+            text-align: center;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        main {
+            padding: 20px 0;
+        }
+
+        .about-header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .about-header h1 {
+            font-size: 2.5em;
+            color: #800000;
+            margin: 0;
+        }
+
+        .about-header p {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .content h2 {
+            font-size: 2em;
+            color: #800000;
+            margin-bottom: 10px;
+        }
+
+        .content p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            border-top: #00468b 4px solid;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7b/Concordia_University_logo.svg/1200px-Concordia_University_logo.svg.png" alt="Concordia University">
+        <div class="user-icon" onclick="toggleUserPopup()">
+            <img src="https://img.icons8.com/ios-filled/50/000000/user-male-circle.png" alt="User Icon">
+            <div class="user-popup" id="userPopup">
+                <h3>Account</h3>
+                <a href="/login">
+                    <button>Login</button>
+                </a>
+                <a href="/signup">
+                    <button>Signup</button>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href='/home'>Home</a></li>
+                <li><a href='/about'>About</a></li>
+                <li><a href='/departments'>Departments</a></li>
+                <li><a href='/faq'>FAQ</a></li>
+                <li><a href='/contact'>Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="about-header">
+            <h1>About Concordia University</h1>
+            <p>Located in the vibrant and multicultural City of Montreal and placed among the top-ranked universities worldwide among the largest urban universities in Canada.</p>
+        </section>
+
+        <section class="content">
+            <h2>This is our story</h2>
+            <p>While Concordia’s next-generation thinking allows it to constantly look forward, its roots are firmly planted in two distinctive institutions of higher education, both with illustrious histories. The university was officially founded on August 24, 1974, following the merger of Loyola College and Sir George Williams University.</p>
+            <p>Concordia adopted its name from Montreal’s motto, Concordia salus, which means “well-being through harmony.”</p>
+
+            <h2>Founding institutions</h2>
+            <h3>Loyola College</h3>
+            <p>Loyola College grew out of the English-language program of Collège Sainte-Marie, a Jesuit college founded in 1848. Loyola College became a separate institution in 1896. Loyola was first located in downtown Montreal before it relocated to land it acquired in 1900 in the city’s west end. The college moved into the three original buildings on the current Loyola Campus in 1916.</p>
+
+            <h3>Sir George Williams University</h3>
+            <p>Sir George Williams University originated in the evening classes offered by a YMCA Educational Program that began in 1851 and continued in various YMCA facilities in downtown Montreal. The program became a co-educational college in 1926, introducing university-level courses in 1929. Sir George Williams conferred its first university degrees in 1936 and earned its university charter — under which Concordia currently grants degrees — in 1948.</p>
+
+            <h2>Steady growth</h2>
+            <p>Throughout its history, Concordia has experienced steady and impressive growth in enrolment, number of faculty and staff, and research.</p>
+            <p>By the 2019-20 academic year, undergrad and graduate enrolment stood at 46,077, more than double the number at Concordia’s founding.</p>
+            <p>Concordia has received more than $35 million in Canada Foundation for Innovation funding since the Government of Canada created the program in 1997 to support Canadian research infrastructure.</p>
+            <p>In 2000, the Canadian government initiated the Canada Research Chair Program to establish 2,000 research professorships across the country. In 2004, Concordia had three Canada Research Chairs; by 2020, that number jumped to 28.</p>
+            <p>In 2019, Concordia welcomed Ursula Eicker as the Canada Excellence Research Chair (CERC) in Smart, Sustainable and Resilient Communities and Cities. Eicker was the university’s first hire through CERC, which awards up to $10 million over seven years to establish ambitious research programs.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Concordia University. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleUserPopup() {
+            const popup = document.getElementById('userPopup');
+            popup.style.display = (popup.style.display === 'block') ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>

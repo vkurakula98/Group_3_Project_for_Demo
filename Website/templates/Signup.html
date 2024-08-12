@@ -62,7 +62,6 @@
             font-weight: bold;
         }
         .form-container input[type="text"],
-        .form-container input[type="email"],
         .form-container input[type="password"],
         .form-container input[type="date"],
         .form-container select {
@@ -84,9 +83,17 @@
         .form-container input[type="submit"]:hover {
             background-color: #002244;
         }
-        .error {
-            color: red;
-            margin-bottom: 10px;
+        .extra-options {
+            margin-top: 10px;
+            text-align: center;
+        }
+        .extra-options a {
+            color: #003366;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .extra-options a:hover {
+            text-decoration: underline;
         }
         .footer {
             background-color: #333;
@@ -97,65 +104,57 @@
             bottom: 0;
             width: 100%;
         }
+        .error-message {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
     </style>
     <script>
-        function updateFormFields() {
-            const role = document.getElementById('role').value;
-            const idField = document.getElementById('id-field');
+        function toggleIdField() {
+            var role = document.getElementById('role').value;
+            var studentIdField = document.getElementById('student-id-field');
+            var coordinatorIdField = document.getElementById('coordinator-id-field');
+
             if (role === 'student') {
-                idField.innerHTML = `
-                    <label for="student-id">Student ID</label>
-                    <input type="text" id="student-id" name="student-id" required>
-                `;
+                studentIdField.style.display = 'block';
+                coordinatorIdField.style.display = 'none';
             } else if (role === 'coordinator') {
-                idField.innerHTML = `
-                    <label for="coordinator-id">Coordinator ID</label>
-                    <input type="text" id="coordinator-id" name="coordinator-id" required>
-                `;
+                studentIdField.style.display = 'none';
+                coordinatorIdField.style.display = 'block';
             } else {
-                idField.innerHTML = '';
+                studentIdField.style.display = 'none';
+                coordinatorIdField.style.display = 'none';
             }
         }
 
-        function validateForm(event) {
-            event.preventDefault();
+        function validateForm() {
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirm-password').value;
+            var studentId = document.getElementById('student-id').value;
+            var coordinatorId = document.getElementById('coordinator-id').value;
+            var role = document.getElementById('role').value;
+            var errorMessage = '';
 
-            const role = document.getElementById('role').value;
-            const studentId = document.getElementById('student-id');
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-
-            let valid = true;
-            let errorMessage = '';
-
-            // Check if password matches confirm password
             if (password !== confirmPassword) {
                 errorMessage += 'Passwords do not match.<br>';
-                valid = false;
             }
 
-            // Check if student ID is 6 digits
-            if (role === 'student' && (!studentId || studentId.value.length !== 6)) {
-                errorMessage += 'Student ID must be 6 digits.<br>';
-                valid = false;
+            if (role === 'student' && studentId.length !== 8) {
+                errorMessage += 'Student ID must be 8 digits long.<br>';
             }
 
-            // Validate email format
-            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            if (!emailPattern.test(email)) {
-                errorMessage += 'Invalid email format.<br>';
-                valid = false;
+            if (role === 'coordinator' && coordinatorId.length !== 8) {
+                errorMessage += 'Coordinator ID must be 8 digits long.<br>';
             }
 
-            // Display error message if form is not valid
-            if (!valid) {
+            if (errorMessage) {
                 document.getElementById('error-message').innerHTML = errorMessage;
-                return;
+                return false;
             }
 
-            // If form is valid, submit it
-            document.querySelector('form').submit();
+            return true;
         }
     </script>
 </head>
@@ -178,17 +177,23 @@
     <div class="content">
         <h1>Department Direct - Signup</h1>
         <div class="form-container">
-            <div id="error-message" class="error"></div>
-            <form onsubmit="validateForm(event)">
+            <div id="error-message" class="error-message"></div>
+            <form action="/signup" method="POST" onsubmit="return validateForm()">
                 <label for="role">Select Role</label>
-                <select id="role" name="role" onchange="updateFormFields()" required>
+                <select id="role" name="role" required onchange="toggleIdField()">
                     <option value="">Select a role</option>
                     <option value="student">Student</option>
                     <option value="coordinator">Coordinator</option>
                 </select>
 
-                <div id="id-field">
-                    <!-- Role-specific ID field will be inserted here -->
+                <div id="student-id-field" style="display: none;">
+                    <label for="student-id">Student ID</label>
+                    <input type="text" id="student-id" name="student-id">
+                </div>
+
+                <div id="coordinator-id-field" style="display: none;">
+                    <label for="coordinator-id">Coordinator ID</label>
+                    <input type="text" id="coordinator-id" name="coordinator-id">
                 </div>
 
                 <label for="first-name">First Name</label>
@@ -201,10 +206,16 @@
                 <input type="date" id="dob" name="dob" required>
 
                 <label for="department">Department</label>
-                <input type="text" id="department" name="department" required>
+                <select id="department" name="department" required>
+                    <option value="">Select a department</option>
+                    <option value="Electrical and Computer Engineering">Electrical and Computer Engineering</option>
+                    <option value="Industrial Engineering">Industrial Engineering</option>
+                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    <option value="Aerospace Engineering">Aerospace Engineering</option>
+                </select>
 
                 <label for="email">Email ID</label>
-                <input type="email" id="email" name="email" required>
+                <input type="text" id="email" name="email" required>
 
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
@@ -212,8 +223,11 @@
                 <label for="confirm-password">Confirm Password</label>
                 <input type="password" id="confirm-password" name="confirm-password" required>
 
-                <input type="submit" value="Register">
+                <input type="submit" value="Sign Up">
             </form>
+            <div class="extra-options">
+                <a href="/login">Already have an account? Login</a>
+            </div>
         </div>
     </div>
 

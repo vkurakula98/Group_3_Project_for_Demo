@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>Coordinator's Event Management - Concordia University</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background: #800000;
+            color: #fff;
+            padding: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: #00468b 4px solid;
+        }
+
+        header img {
+            height: 60px;
+            margin-left: 20px;
+        }
+
+        .user-icon {
+            margin-right: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .user-info {
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info p {
+            margin: 0;
+            font-size: 1em;
+            margin-right: 10px;
+        }
+
+        .user-icon img {
+            height: 40px;
+            width: 40px;
+        }
+
+        .user-popup {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            width: 150px;
+            z-index: 1000;
+        }
+
+        .user-popup button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #00468b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+
+        .user-popup button:hover {
+            background: #002f5f;
+        }
+
+        nav {
+            background: #00468b;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            padding: 0;
+            list-style: none;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        main {
+            padding: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            background-color: #fff;
+            border-collapse: collapse;
+        }
+
+        table th,
+        table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #00468b;
+            color: #fff;
+        }
+
+        table td {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .action-buttons button {
+            padding: 5px 10px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        .edit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+            color: #fff;
+        }
+
+        .delete-btn:hover {
+            background-color: #da190b;
+        }
+
+        .view-students-btn {
+            background-color: #00468b;
+            color: #fff;
+        }
+
+        .view-students-btn:hover {
+            background-color: #002f5f;
+        }
+
+        .students-collapse {
+            display: none;
+            text-align: left;
+            background-color: #f4f4f4;
+        }
+
+        .students-collapse ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .students-collapse li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .remove-btn {
+            background-color: #f44336;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            margin-left: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .remove-btn:hover {
+            background-color: #da190b;
+        }
+
+        footer {
+            background-color: #800000;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+            border-top: 4px solid #00468b;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7b/Concordia_University_logo.svg/1200px-Concordia_University_logo.svg.png"
+            alt="Concordia University">
+        <div class="user-icon" onclick="toggleUserPopup()">
+            <div class="user-info">
+                <p>Welcome, {{ coordinator.first_name }} {{ coordinator.last_name }}</p>
+            </div>
+            <img src="https://img.icons8.com/ios-filled/50/000000/user-male-circle.png" alt="User Icon">
+            <div class="user-popup" id="userPopup">
+                <button onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href='/Coordinator_home'>Home</a></li>
+                <li><a href='/event_creation'>Create Events</a></li>
+                <li><a href='/edit_contact'>Edit Contact</a></li>
+                <li><a href='/view_questions'>Show Questions</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <h1>Your Created Events</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Location</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for event in events %}
+                    <tr>
+                        <td>{{ event.event_name }}</td>
+                        <td>{{ event.description }}</td>
+                        <td>{{ event.event_date }}</td>
+                        <td>{{ event.event_time }}</td>
+                        <td>{{ event.location }}</td>
+                        <td class="action-buttons">
+                            <button class="edit-btn" onclick="window.location.href='/edit_event/{{ event.id }}'">Edit</button>
+                            <button class="delete-btn" onclick="deleteEvent({{ event.id }})">Delete</button>
+                            <button class="view-students-btn" onclick="toggleStudents({{ event.id }})">View Students</button>
+                        </td>
+                    </tr>
+                    <tr class="students-collapse" id="students-{{ event.id }}">
+                        <td colspan="6">
+                            <ul id="students-list-{{ event.id }}"></ul>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 DepartmentDirect - Concordia University. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleUserPopup() {
+            var popup = document.getElementById("userPopup");
+            popup.style.display = popup.style.display === "block" ? "none" : "block";
+        }
+
+        function logout() {
+            window.location.href = '/logout';
+        }
+
+        function deleteEvent(eventId) {
+            if (confirm('Are you sure you want to delete this event?')) {
+                fetch(`/delete_event/${eventId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        alert('Event deleted successfully!');
+                        window.location.reload();
+                    } else {
+                        alert('Failed to delete event.');
+                    }
+                }).catch(error => console.error('Error deleting event:', error));
+            }
+        }
+
+        function toggleStudents(eventId) {
+            var collapseRow = document.getElementById(`students-${eventId}`);
+            collapseRow.style.display = collapseRow.style.display === "table-row" ? "none" : "table-row";
+
+            if (collapseRow.style.display === "table-row") {
+                fetch(`/get_registered_students/${eventId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        var studentList = document.getElementById(`students-list-${eventId}`);
+                        studentList.innerHTML = ''; // Clear previous entries
+                        data.students.forEach(student => {
+                            var listItem = document.createElement('li');
+                            listItem.textContent = `${student.first_name} ${student.last_name} (ID: ${student.student_id})`;
+                            var removeButton = document.createElement('button');
+                            removeButton.textContent = 'Remove';
+                            removeButton.className = 'remove-btn';
+                            removeButton.onclick = () => removeStudent(eventId, student.student_id);
+                            listItem.appendChild(removeButton);
+                            studentList.appendChild(listItem);
+                        });
+                    }).catch(error => console.error('Error fetching students:', error));
+            }
+        }
+
+        function removeStudent(eventId, studentId) {
+            if (confirm('Are you sure you want to remove this student?')) {
+                fetch(`/remove_student/${eventId}/${studentId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        alert('Student removed successfully!');
+                        toggleStudents(eventId); // Refresh the student list
+                    } else {
+                        alert('Failed to remove student.');
+                    }
+                }).catch(error => console.error('Error removing student:', error));
+            }
+        }
+    </script>
+</body>
+
+</html>
