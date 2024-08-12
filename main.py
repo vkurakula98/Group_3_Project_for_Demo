@@ -4,7 +4,7 @@ from Website import create_app
 from config import Config
 #from routes import auth_bp
 from flask_jwt_extended import JWTManager
-from flask_pymongo import PyMongo
+# from flask_pymongo import PyMongo
 
 # app.config.from_object(Config)
 # mongo = PyMongo(app)
@@ -15,4 +15,4 @@ app = create_app()
 if __name__ == '__main__':
     app.run(debug=True)
 
-
+# changes made by khushi
