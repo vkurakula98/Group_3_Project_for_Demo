@@ -5,7 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7304173d-72ad-4c87-a3fc-e1170632a368" name="Changes" comment="changes">
+      <change afterPath="$PROJECT_DIR$/Website/assets/EcE.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Website/assets/Mechanical.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Website/assets/aerospace.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Website/assets/industrial.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Website/assets/logo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Website/assets/university.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Website/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/templates/Base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Website/templates/Base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Website/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instance/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/database.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,11 +60,12 @@
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/vkura/PycharmProjects/Group_3_Project_for_Demo/Website/templates&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/vkura/PycharmProjects/Group_3_Project_for_Demo/Website/assets&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\vkura\PycharmProjects\Group_3_Project_for_Demo\Website\assets" />
       <recent name="C:\Users\vkura\PycharmProjects\Group_3_Project_for_Demo\Website\templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -150,7 +161,23 @@
       <option name="project" value="LOCAL" />
       <updated>1723473000569</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="changes">
+      <option name="closed" value="true" />
+      <created>1723473783297</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1723473783297</updated>
+    </task>
+    <task id="LOCAL-00008" summary="changes">
+      <option name="closed" value="true" />
+      <created>1723473800630</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1723473800630</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -173,7 +200,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Website/views.py</url>
-          <line>243</line>
+          <line>245</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

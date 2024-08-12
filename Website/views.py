@@ -126,6 +126,8 @@ def signup_page():
         #return render_template("RegistrationConfirmed.html")
         return render_template("RegistrationConfirmed.html")
     return render_template("signup.htm")
+
+#changes made by viswanath
 @views.route('/student_profile')
 def student_profile():
     if 'user_id' not in session or session['role'] != 'student':
