@@ -226,6 +226,8 @@ def view_questions():
 
     return render_template('answer_questions.html', student=student, coordinator=coordinator)
 
+# changes made in registration form
+
 @views.route('/ask_questions')
 def ask_questions():
     coordinator = session.get('coordinator')
