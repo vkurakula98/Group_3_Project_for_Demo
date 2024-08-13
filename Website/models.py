@@ -65,5 +65,5 @@ class Question(db.Model):
     coordinator_id = db.Column(db.Integer, db.ForeignKey('coordinator.coordinator_id'))
     coordinator = db.relationship('Coordinator', backref=db.backref('answers', lazy=True))
 
-
+#changes made by Khushi
 
