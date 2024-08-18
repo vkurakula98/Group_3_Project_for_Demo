@@ -62,7 +62,7 @@ subscriber_data = {
 }
 
 subscribers_collection.insert_one(subscriber_data)
-#Review to be done outside the team
+#Review to be done exterior the team
 
 # Query data from Events collection
 print("Events:")
