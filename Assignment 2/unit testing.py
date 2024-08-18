@@ -66,6 +66,7 @@ class TestEventManagement(unittest.TestCase):
         subscribe_to_event("event123", "subscriber1")
         publish_event("event123")
         mock_print.assert_called_with('Subscriber subscriber1 received event summary: This is a test event.')
+#Review to be done outside the team
 
 if __name__ == '__main__':
     unittest.main()
